@@ -2,20 +2,21 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const patientController = require("../../../controllers/patientsController");
-const reportsController = require("../../../controllers/reportsController");
 
+// only docotrs can register patient so its protected
 router.post(
   "/register",
   passport.authenticate("jwt", { session: false }),
   patientController.register
 );
 
-router.use(
+// only doctor can create reports so it's protected
+router.post(
   "/:id/create_report",
   passport.authenticate("jwt", { session: false }),
-  reportsController.createReport
+  patientController.createReport
 );
 
-router.get("/:id/all_reports", reportsController.all_reports);
+router.get("/:id/all_reports", patientController.all_reports);
 
 module.exports = router;

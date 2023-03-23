@@ -18,6 +18,7 @@ const doctorSchema = new mongoose.Schema({
   },
 });
 
+// to save save password by encrypting
 doctorSchema.pre("save", async function (next) {
   //Only run if password is modified
   if (!this.isModified("password")) return next();
@@ -28,6 +29,7 @@ doctorSchema.pre("save", async function (next) {
   next();
 });
 
+// to check password
 doctorSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword

@@ -7,6 +7,7 @@ const patientSchema = new mongoose.Schema(
       require: true,
     },
 
+    //this report field will help to fetch all reports of an particular patient
     reports: [
       {
         type: mongoose.Schema.Types.ObjectId,
